@@ -1,4 +1,5 @@
 <TODO>: 
+- post many posts and see if background color doesn't cover the y overflow
+
 - change theme to dark 
 - maybe custom animations? 
-

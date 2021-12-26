@@ -5,6 +5,9 @@ https://tailwindcss.com/docs/guides/nextjs
     - "purge" has changed to 'content' (ith bc tailwind got a new major update to tailwind 3.0 recently) 
     https://tailwindcss.com/docs/guides/nextjs (next js tailwind getting started tutorial) 
 
+https://flowbite.com/tools/tailwind-cheat-sheet/?ref=producthunt
+- tailwind css cheatsheet (has everything, can search for it)
+
 mode: "jit"
 - inside tailwind.config.css
 - just in time compiler --> new feature of tailwind 
@@ -19,6 +22,11 @@ https://tailwindcss.com/docs/adding-custom-styles
 - tailwind - add custom style 
   - @layer is one way 
   m-[127px] --> this works too !
+
+https://developers.facebook.com/apps/611367933484620/settings/basic/
+- facebook developer app settings page 
+  - client id, secret, and more 
+  - make sure it's in testing mode 
 
 main tag 
 - do I need them? check If I have them in normal react projects 
