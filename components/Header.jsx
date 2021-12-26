@@ -2,15 +2,18 @@ import Image from "next/image";
 import { BellIcon, ChatIcon, ChevronDownIcon, HomeIcon, ViewGridAddIcon } from "@heroicons/react/solid";
 import { SearchIcon, FlagIcon, PlayIcon, ShoppingCartIcon, UserGroupIcon} from "@heroicons/react/outline"
 import HeaderIcon from "./HeaderIcon";
+import { signOut, useSession } from "next-auth/react";
 
 function Header() {
+  const { data: session, status } = useSession() 
+  
   return (
     <div className="flex sticky top-0 z-50 bg-white items-center p-2 shadow-md">
       {/* Left  */}
       <div className="flex items-center">
         <Image
           className="cursor-pointer"
-          src="https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png"
+          src={"https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png"}
           width={70}
           height={40}
           layout="fixed"
@@ -33,7 +36,15 @@ function Header() {
 
       {/* Right */}
       <div className="flex grow justify-end items-center whitespace-nowrap font-semibold space-x-6">
-        <p>Heon Yim</p>
+        <Image
+        src={session.user.image}
+        onClick={() => signOut()}
+        className="cursor-pointer rounded-full"
+        width={40}
+        height={40}
+        layout="fixed"></Image>
+        
+        <p>{session.user.name}</p>
         <ViewGridAddIcon className="right-icon"></ViewGridAddIcon>
         <ChatIcon className="right-icon"></ChatIcon>
         <BellIcon className="right-icon"></BellIcon>
