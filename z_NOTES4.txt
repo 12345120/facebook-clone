@@ -1,0 +1,316 @@
+################### EXPRESS.js ########################
+
+https://expressjs.com/en/guide/using-middleware.html
+- express app.use() --> application-level middleware 
+- var router = express.Router() --> router-level middleware
+  router.use(function (req, res, next) {
+    // process anything here
+    next()
+  })
+  - next() **** (means it's not the end)
+
+- next --> "pass control to the next middleware function"
+  
+- const auth = require("./routes/auth); 
+  app.use("/auth", auth);
+  
+(from above site: exmple of app.get using router-level middleware by calling next() )
+- don't have to call next() if you're gonna end it there (like res.send() ) 
+  - router.use vs. .get --> use is for using next(), get means it ends there (not sure tho)
+https://stackoverflow.com/questions/15601703/difference-between-app-use-and-app-get-in-express-js
+- app.get vs. app.use 
+  - use is lower level (for including middlewares) 
+  - middleware: handler for the HTTP request before it arrives to the routes you've set up in Express
+  - get's method is get, whereas use can get the method with "req.method" 
+--------------------------------------------------------------------------------
+var express = require('express')
+var app = express()
+var router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use(function (req, res, next) {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/user/:id', function (req, res) {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, function (req, res) {
+  res.sendStatus(401)
+})
+--------------------------------------------------------------------------------#
+
+https://www.youtube.com/watch?v=6ZCU4QetVTs
+- JWT tutorial (1.5 hrs)
+- auth .js --> imported index.js --> app.use("/auth", auth);
+- https://stackoverflow.com/questions/28305120/differences-between-express-router-and-app-get
+  - app.get() vs. router.get() --> router doesn't listen
+
+
+<<summary>>: (I think) 
+- router --> for mounting on the app  
+  - create router, define router.use & router.get & etc., and then app.use('/', router) or sth 
+--------------------------------------------------------------------------------
+// function with no mount path --> executed every time the app receives a request 
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+--------------------------------------------------------------------------------#
+- mount path could be empty (which means just the function)
+- no mount path (ex: app.use(function)) means unconditional execution independent of route 
+- app.use("/path", func) --> similar notion to unconditional, but in this case, could be understood as: 
+  - whenever sth of "/path" (ex: /path/sth/asdf, /path, ...) given, execute the func
+  - the func is usually a router (express.Router()) instance 
+  - inside that router you could do: router.use(function) for unconditional execution,
+    router.get('/...', func)  
+
+<<summary>>: 
+- multiple gets can exist for the same route 
+- next(): ********
+  - if no more middleware functions, then it sends to the next route function (.get, ...) 
+    - (which means multiple route funcs for the same path could exist? yes I think) 
+  - if there is more middleware funcs, pass control to next middleware func 
+  - if next('route'), ignore the following middleware funcs in the stack (inside the same router func),
+    and then pass control to the next router func (ex: another app.get down below with same path)  
+- the thing is that use doens't require a path while get does *** 
+  - I think that's the reason behind the notion that .use is closely related to (or even directly
+    referred to as) the concept of the middleware
+  - you can have multiple middleware funcs inside .get (important) ***
+
+--------------------------------------------------------------------------------
+var myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+
+app.use(myLogger);
+
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
+app.listen(3000)
+--------------------------------------------------------------------------------#
+- this could have been changed to: 
+--------------------------------------------------------------------------------
+var myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+
+app.get('/', myLogger, function (req, res) {
+  res.send('Hello World!')
+})
+--------------------------------------------------------------------------------#
+- one difference: unlike above, 'myLogger' isn't unconditional execution but instead will 
+  only execute everytime '/', or the root path, has been reached 
+
+
+
+######################## Prisma (next-generation ORM) ###########################
+
+ORM --> object-relational mapping 
+- lets you use language of your choice to query from db 
+GraphQL --> graph querying language
+
+- prisma sits between server and db 
+- helps with querying ig? 
+- can be like:
+  - REST api (or GraphQL) <--> server <--> prisma <--> db
+- specifically for js and ts 
+- db agnostic --> sql & nosql (comparison against Sequelize & Mongoose)
+
+https://www.prisma.io/docs/concepts/components/prisma-schema/relations
+- relations 
+- 1-1, 1-n, m-n 
+
+- parent, arg, ctx, info
+- parent --> previous query level 
+- arg --> arguments from function Parameters
+- ctx (context) --> sth like context provider of react, this is where prisma is included
+- info --> idk yet
+
+
+###################### GraphQL #############################
+
+https://www.howtographql.com/graphql-js/2-a-simple-query/
+- graphql with node.js 
+- apollo-server is a fully-featured GraphQL server. It is based on Express.js
+- Runs everywhere: Can be deployed via Vercel, Up, AWS Lambda, Heroku etc
+
+https://www.howtographql.com/react-apollo/1-getting-started/
+- react & apollo 
+
+https://www.preciouschicken.com/blog/posts/vercel-apollo-server-react/
+- <<vercel apollo server react>> ****************
+- serverless function for Apollo server (Search For: Apollo Server) 
+- uses apollo-server-micro (micro as framework instead of express) 
+  - framework-specific package of apollo 
+
+https://www.apollographql.com/docs/apollo-server/integrations/middleware/#common-options
+- createHandler (apollo-server-micro) (micro here is the web framework) 
+- why use micro tho? 
+- applyMiddleware, getMiddleware, createHandler (depends on package) 
+  - framework-specific middleware function
+  - these methods are called instead of "server.listen"
+https://www.apollographql.com/docs/apollo-server/api/apollo-server/#framework-specific-middleware-function
+- Framework-specific middleware function (doc)
+https://www.smashingmagazine.com/2020/10/graphql-server-next-javascript-api-routes/
+- <<COMPLETE GUIDE: build graphql server with next.js>> *********
+  - uses micro here as well 
+  
+
+<<summary>>:
+- normally, graphql server would need to be hosted live (as backend), but next.js 
+  already has a serverless backend, so we need to create a serverless graphql server,
+  and I think micro is the only one capable of doing that 
+- ig the reason for using apollo-server-express (framework-specific apollo pckg)
+  is because it is an actual server (backend) (like a plain express backend). So, 
+  if you want routing functionalities, middleware inclusion, etc., you would want to 
+  use apollo-server-express so that you can use express like you would with a plain express
+  server with an extra graphql functionality 
+
+
+- Apollo Client's useQuery hook
+- ig the "useQuery" hook is only provided by Apollo Client
+  - and that's why react needs Apollo for graphql 
+
+
+##################### OTHERS ###########################
+
+https://www.reddit.com/r/node/comments/6zlxm8/micro_vs_koa_vs_express/
+- Micro vs Koa vs Express (Node.js web framework comparison) 
+- koa & micro is super lightweight 
+- Hapi is also recommended more simple stuff 
+
+https://www.besanttechnologies.com/what-is-expressjs
+- why use Express 
+  - middleware, routing, faster server-side development, enables template engine (dynamic) 
+https://www.youtube.com/watch?v=45dAt9Gz8rE
+- adding middleware & handling routes with pure Node.js takes a lot of time 
+- example of how tedius and complex pure node.js could be without express 
+
+export default function(...) 
+      === 
+module.exports = function(...) 
+(I think)
+
+you don't need express for next.js apps 
+- bc the functionalities of express is already supported in next ig? 
+
+https://vercel.com/docs/edge-network/overview
+- serverless functions deployed regions 
+- so serverless funcs are also deployed across multiple reigons ig 
+https://vercel.com/docs/edge-network/caching
+- "static caching is automatic for all deployments" 
+
+
+https://www.imperva.com/learn/performance/what-is-cdn-how-it-works/
+- CDN guide (series) 
+
+
+https://stackoverflow.com/questions/47745884/laravel-passport-vs-jwt-vs-oauth2-vs-auth0
+- Passport vs Auth0 vs OAuth2 vs JWT 
+- Auth0 is an authentication and authorization service. It is kinda "all in one" solution
+  for API auth. It implements JWT by default and can implement Oauth2 as well as many
+  other protocols.
+  
+
+https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/
+- <<very detailed next.js auth0 authentication flow>>
+- for auth0
+- too complicated
+
+
+https://stackoverflow.com/questions/55690143/what-is-the-difference-between-env-local-and-env-development-local
+- .env vs. .env.local vs. ... 
+- it's about priority 
+
+- .next --> build directory (just like "build" dir in React after running npm run build)
+
+https://medium.com/geekculture/why-and-how-to-get-started-with-next-auth-61740558b45b
+- <<next-auth medium guide>>
+- getSession is different from useSession
+
+"nexauth allows us to have session info on the server" (sonny made contrast with fireb's auth)
+- ig fireB auth is only for client-side? 
+
+
+Just realized that with snapshot listener (of fireB), you can listen to changes to the db realtime
+- ex) LinkedIn Clone
+
+next.config.js 
+- change in this file requires restart 
+- so basically anything that is not the Component (pages) requires a restart 
+
+https://css-tricks.com/almanac/properties/t/text-overflow/
+- CSS Tricks On: 
+- tailwind: <<truncate>> --> overflow: hidden, white-space: nowrap, text-overflow: ellipsis
+- this is a common combo 
+- whitespace: https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
+- doesn't allow for multiple lines 
+"text-overflow only occurs when the container’s overflow property has the value hidden, scroll or auto
+and white-space: nowrap"
+- text-overflow relies on the two pre-conditions
+- white-space: forces everything into single line 
+
+https://firebase.google.com/docs/reference/node/firebase.firestore.Timestamp#todate
+- toDate, method of timestamp type in firebase 
+
+img used instead of Image in case of retrieved image 
+- so ig it's only for initial images? 
+
+https://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript#answer-1646957
+- "new" keyword in js (second answer) 
+
+<Image> must specify either height || width, or layout
+- layout="fill" --> and then you can specify objectFit="contain, cover, fill, etc."
+
+https://github.com/csfrequency/react-firebase-hooks/tree/ef58420b1c74ea5b5d2cec42fe24370f45b76950/firestore#usecollection
+- react-firebase-hooks 
+- amazing module, lets you use hooks instead of snapshot 
+
+https://www.w3schools.com/jsref/jsref_tolocalestring.asp
+- toLocaleString() --> date to string 
+
+https://www.npmjs.com/package/tailwind-scrollbar-hide
+- tailwind-scrollbar-hide (npm package) 
+- tailwind.config.js --> plugins: [require('tailwind-scrollbar-hide')] 
+
+Feed.jsx 
+- overflow-y-auto scrollbar-hide
+- overflow-y-auto --> scrollbar for feed only, not the whole pages 
+  - if whole page, then the sidebar and the widgets will be scrolled out of view as well
+- scrollbar-hide --> hides scrollbar 
+
+https://www.google.com/search?q=tailwind+how+to+use+theme&rlz=1C1CHZN_enUS934US934&oq=tailwind+how+to+use+theme&aqs=chrome..69i57j0i22i30l9.1896j0j1&sourceid=chrome&ie=UTF-8#kpvalbx=_1AAwYeHdBfKh5NoPqsGSiAg22
+- how to use custom colors for tailwind 
+- module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        custom: {
+          statusOn: "..."
+        }
+      }
+    }
+  }
+}
+- here, this becomes --> [prefix]-custom-statusOn (ex: gb-custom-statusOn) 
+- so cool 
+
+
+Sonny shows how to fetch posts using SSR, but I think that's a bad idea 
+- bc client won't see anything until server fully loads
+
+with CSR --> flicker of inaccessible conntent bc it's rendered on client side? (not sure)
+with SSR --> rendered on server and then sent to client, so no flicker

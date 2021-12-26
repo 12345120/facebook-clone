@@ -1,0 +1,800 @@
+https://tailwindcss.com/docs/guides/nextjs
+- where you install tailwind and initialize two config files (postcss.config.js, tailwind.config.js)
+- copy and paste purge files 
+  - https://github.com/tailwindlabs/tailwindcss/discussions/6019
+    - "purge" has changed to 'content' (ith bc tailwind got a new major update to tailwind 3.0 recently) 
+    https://tailwindcss.com/docs/guides/nextjs (next js tailwind getting started tutorial) 
+
+mode: "jit"
+- inside tailwind.config.css
+- just in time compiler --> new feature of tailwind 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+- add this at the top of "globals.css"
+- tailwind strips away all default css 
+
+https://tailwindcss.com/docs/adding-custom-styles
+- tailwind - add custom style 
+  - @layer is one way 
+  m-[127px] --> this works too !
+
+main tag 
+- do I need them? check If I have them in normal react projects 
+
+
+https://heroicons.com/
+- heroicons (import { BellIcon } from "@heroicons/react/solid";) 
+
+
+http://jsfiddle.net/mgr0en3q/1/
+- inline-flex vs flex 
+- placement of content after flex container is different (div and inline)
+
+
+https://tailwindcss.com/docs/hover-focus-and-other-states#group-hover
+- group hover 
+- when parent div:hover and you want to do sth to children's css,
+  you would normally do addClass to children 
+    - using useRef() --> ref={childRef} to child, childRef.current.style['css-property'] = sth 
+    - or useState() and inline styling 
+      - I think inline styling is in general much more customizable 
+
+
+px --> x means left & right
+drop-shadow-md --> md: medium
+border-b-2 --> b: bottom 
+- the nubmers are usually in rem 
+flex-grow --> 1 1 auto 
+flex-1 --> 1 1 0%
+bg-{color} --> white & black don't need #, others do
+rounded-full
+items-center
+justify-center
+place-items-center
+space-x-6 --> space-between
+max-w-[600px] --> ig you can speicfy certain values inside []?
+flex vs. flex-1 --> "flex": display: flex  --> this DOESN'T cause expansion 
+                    "fex-1": flex: 1 1 0%  --> this is the one that causes expansion
+brightness-75 --> "brightness filters to an element"
+flex-1 vs. flex-grow --> flex-grow's flex-basis is auto (1 1 auto, while flex-1 is 1 1 0) 
+overflow-y-auto --> what is this? 
+
+
+
+https://github.com/nextauthjs/next-auth
+- nextAuth 
+- firebase auth --> static generation (as opposed to server-side rendering) 
+- nextAuth is created for nextjs development 
+https://javascript.plainenglish.io/how-to-create-a-custom-sign-in-page-in-next-auth-1612dc17beb7
+- medium tutorial on nextauth custom sign in page
+- (using ...slugs and serversideprops) 
+
+
+https://leerob.io/blog/nextjs-authentication
+- Authentication Patterns for Next.js 
+https://www.youtube.com/watch?v=NSR_Y_rm_zU
+- Youtube Vid on this
+(key points & summary) 
+- If you export an async function called getServerSideProps from a page,
+Next.js will pre-render this page on each request using the data returned
+by getServerSideProps.
+ 
+
+https://arunoda.me/blog/ssr-and-server-only-modules
+- bundle size problem when npm package is installed 
+- Usually, most of the NPM modules we use in client side web apps can be used in 
+  both server and client environments
+- So, webpack always tries to bundle all of the NPM modules as much as it possibly can.
+- But sometimes, we need to import some NPM modules only to run inside the server.
+- For an example, when fetching data in a Next.js app we might use a server only 
+  module to fetch data.
+
+
+https://nextjs.org/learn/basics/create-nextjs-app
+- Nest.js official tutorial 
+
+https://stackoverflow.com/questions/65912413/how-to-add-multiple-classnames-to-nextjs-elements
+- have multiple className for next.js elements
+https://stackoverflow.com/questions/66992178/how-can-i-toggle-a-class-and-change-the-css-in-nextjs
+- how to toggle className to change CSS in Nextjs 
+- I'm pretty sure useRef() is also one of the ways
+
+https://nextjs.org/learn/basics/assets-metadata-css/styling-tips
+- Using 'classnames' library to toggle classes
+----------------------------------------------------------------------
+<div
+  className={cn({
+    [styles.success]: type === 'success',
+    [styles.error]: type === 'error'
+  })}
+>
+----------------------------------------------------------------------
+
+https://nextjs.org/learn/basics/data-fetching/pre-rendering
+- pre-rendering of React Components into HTML 
+- hydration
+- By default, Next.js pre-renders every page. This means that Next.js generates 
+  HTML for each page in advance, instead of having it all done by client-side 
+  JavaScript. Pre-rendering can result in better performance and SEO.
+- Each generated HTML is associated with minimal JavaScript code necessary 
+  for that page. When a page is loaded by the browser, its JavaScript code 
+  runs and makes the page fully interactive. (This process is called hydration.)
+
+
+
+- code splitting: happens with both javascript AND css MODULES (part of the reason why you would
+  want to use them)
+- when <Link> is in viewport, starts loading the page associated with it
+
+
+https://nextjs.org/learn/basics/data-fetching/two-forms
+- server-side rendering vs. static generation 
+
+https://www.geeksforgeeks.org/top-7-content-management-systems-for-2021/
+- CMS (content management system) and exmaples (shpoify, wix, wordpress, squarespace)
+
+https://www.youtube.com/watch?v=GQzn7XRdzxY
+- server-side rendering series (official Firebase)
+
+UI - user interaface
+UX - user experience
+
+code-splitting (includes javascript and css (module) code)
+- pre-rendering is good for SEO 
+- two ways to pre-render: Static Generation vs. Server-side rendering
+- SG --> pre-renders @ build time 
+  - data that changes on each request --> no, you can't. 
+- SRR --> pre-renders on each request (I think this includes requests by bots too?)
+  - contains data that changes on each request --> yes, you can.
+- SG + client-side rendering 
+  - static, but data fetching takes place client-side (but no pre-rendering for the non-static content)
+
+hydration
+- pre-rendered content delivered, but it takes time to download the js that is
+  responsible for making the website interactive 
+- that process is called hydration 
+
+
+https://www.youtube.com/watch?v=j8OUmE4Vj3M
+- SEO (web crawler bots cannot see the content within <div class='root'>) 
+  - js needs to take care of that 
+- next.js solves this issue (pre-rendering) 
+
+
+https://colinhacks.com/essays/building-a-spa-with-nextjs
+- plain react (SPA: single page application) is client-side rendering
+
+- summary: 
+  - plain html and css are okay, but plain react uses javascript (jsx) to render the content,
+    but most of the search engines don't execute javascript on its own to render the webpage.
+    (content nested inside <div class='root'> is not shown in source code)
+    That makes it harder for them to index your website into a list, leading to less visibility.
+    That's why you have to pre-render the content into HTML & CSS for crawler bots.
+  - Next.js takes care of pre-rendering for you. (BOTH SG & SSR) 
+    - SG: pre-renders at build time (npm run build?) (yes)
+    (https://stackoverflow.com/questions/64520234/when-exaclty-is-nextjs-build-time-happening)
+    (*** ABOVE: thorough explanation on special func-s like getStaticProp, etc.)
+    (using *** revalidation (ISR) ***, gSP can also be run at run time)
+    (including "revalidate" means: Static Generation --TO--> Incremental Static "Re"Generation)
+    (prevents you from having to do a full rebuild of your application)
+    - SSR: on each request(I think this includes both user and crawler bot requests) 
+  - The IMPORTANT contrast is that plain React takes time for js to render HTML client-side 
+    for both visible content and interactivity (TTI: time to interactive), whereas Next.js 
+    pre-renders, delievers the visible content first (thus fast loading), which is then followed
+    by the hydration process (loading js for interactivity) 
+
+
+CDN (Content Delivery Network) 
+- geographically distributed group of servers which work together to provide 
+  fast delivery of Internet content.
+- CDN is the cache thing (when you cache data, you are storing them in the CDN) 
+- SSR is slower bc the page ** cannot be cached by a CDN **, but the pre-rendered page will
+  always be up-to-date
+  - so ig caching is only for static (literally non-changing) files 
+
+
+https://vercel.com/docs/next.js/incremental-static-regeneration
+- next.js's Incremental Static Generation (ISR) 
+- implemented just by the use of 'revalidate' 
+
+
+https://www.storyblok.com/tp/headless-cms-explained
+- what is a headless CMS 
+  - front-end --> head 
+- A headless CMS is a back-end only content management system (CMS) built from the ground up
+  as a content repository that makes content accessible via a RESTful API or GraphQL API for 
+  display on any device.
+- ex) of headless CMS: contentful 
+https://www.optimizely.com/optimization-glossary/headless-cms/
+- detailed headless cms explanation
+- "A headless CMS has a database to read and write content to" *************
+  - <<so ig it's a bit of an abstraction of the database?>> (for reusability)
+  https://vercel.com/docs/solutions/databases
+  - "If you need a higher level of abstraction on top of your database,
+    consider using a Content Management System (CMS)."
+
+https://stackoverflow.com/questions/14038316/can-i-use-tcp-in-a-restful-service
+- HTTP is a TCP/IP based protocol. So when you use REST you are already using
+  TCP for communication. 
+  
+There's REST & SOAP
+  
+  
+https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side
+- SG with client-side rendering 
+  - If your page contains frequently updating data, and you don’t need to pre-render the data, 
+    you can fetch the data on the client side.
+- ** it doesn't pre-render, ** --> difference from SSR 
+
+
+https://stackoverflow.com/questions/5922882/what-file-uses-md-extension-and-how-should-i-edit-them
+- .md extension (README.md on Github) 
+
+
+https://nextjs.org/learn/basics/dynamic-routes/page-path-external-data
+- Next.js Dynamic Routes Tutorial
+- getStaticPaths returns params --> passed as arg to getStaticProp
+  - pattern in Dynamic Routing
+- "...getStaticProps is given params, which contains id (because the file name is [id].js)."
+  - I see this is different from [...id].js (triple dot notation) (catch-all routes)
+
+https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+- If the page name uses catch-all routes, for example pages/[...slug], then params should
+  contain slug which is an array. For example, if this array is ['foo', 'bar'], then Next.js 
+  will statically generate the page at /foo/bar.
+- catch-all routes
+https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details
+- Dynamic routes can be extended to catch all paths by adding three dots (...) inside the brackets.
+  - ex) pages/posts/[...id].js matches /posts/a, but also /posts/a/b, /posts/a/b/c and so on.
+  - (key point: allows for nested slashes)
+
+
+
+
+https://nextjs.org/docs/routing/introduction#linking-between-pages
+https://nextjs.org/docs/api-reference/next/link
+- Any <Link /> in the viewport (initially or through scroll) will be prefetched by default
+  (including the corresponding data) for pages using Static Generation. The corresponding 
+  data for server-rendered routes is not prefetched.)
+  - prefetched so that the serving of static content feels instantaneous? (I think so)
+    (so that the loading time for plain static content is further minimized?)
+- "Client-side transitions between routes can be enabled via the Link component exported by next/link."
+  
+
+https://nextjs.org/docs/api-routes/dynamic-api-routes
+- dynamic API routes (next.js)
+
+
+---------------------------------------------------
+let obj = {
+	name: 'heon',
+  properties: {
+  	'one': 1,
+    two: 2
+  }
+};
+const { name, properties:{one, two}} = obj; 
+---------------------------------------------------#
+- destructuring assignment, nested 
+---------------------------------------------------
+const [a, b, ...rest] = [10, 20, 30, 40, 50];
+let a = 5;
+let b = 10;
+[a, b] = [b, a]; --> switching 
+const [a, ...rest, b] = [10, 20, 30, 40, 50]; --> X, not allowed
+---------------------------------------------------#
+
+
+{(data || []).map(e => ...)}
+- if data is undefined (false), use [] instead 
+- similar to (conditionIsSatisfied && ReactComponent) -> truthy && truthy --> returns latter one 
+https://kevinyckim33.medium.com/javascript-truthy-falsy-and-logical-operator-cheatsheet-58828e5fdfa
+- truthy, falsy logical operator cheatsheet:
+-----------------------------------------------------
+console.log(truthy1 && truthy2); // truthy2
+console.log(truthy1 || truthy2); // truthy1
+
+console.log(falsy1 && falsy2); // falsy1
+console.log(falsy1 || falsy2); // falsy2
+
+console.log(truthy1 && falsy1); // falsy1
+console.log(truthy1 || falsy1); // truthy1
+console.log(falsy1 && truthy1); // falsy1
+console.log(falsy1 || truthy1); // truthy1
+-----------------------------------------------------#
+
+
+https://www.youtube.com/watch?v=a7JigiLw_OY
+- React Hooks SWR: Fetch, Cache and ReValidate server data with SWR and Axios
+- 36:45 min 
+- takeaway from it: 
+  - SWRConfig React Wrapper Component, useSWR() from 'swr'
+  - he demonstrates page that loads comments from mock serve realtime(?)
+    - code that fetches comment from server is placed within component (and not in gSP)
+    - maybe this is CSR (client-side rendering)? (yes, SWR is client side fetching)
+    
+    
+
+http://comet.lehman.cuny.edu/sfulakeza/su19/tpp/slides/Day%206/AJAX,%20fetch,%20and%20Axios.pdf
+- ajax, fetch, axios 
+https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5
+- fetch is the built-in js method, but has some problems (error handling & no auto-json transforming)
+- axios takes care of both 
+---------------------------------------------------------------------------------------
+fetch(url).then(response => response.json()).then(data => console.log(data));
+axios.get(url).then(response => console.log(response)); --> skips "response.json()"
+---------------------------------------------------------------------------------------#
+
+
+https://codeburst.io/declarative-vs-imperative-programming-a8a7c93d9ad2
+- Declarative Programming vs. Imperative Programming 
+- what should be done vs. how to do it step by step 
+"The React example never actually touches an element. it simply declares an element should be 
+rendered given our current state. It does not actually manipulate the DOM itself."
+
+
+
+https://reactjs.org/docs/refs-and-the-dom.html
+- when to use ref (otherwise, avoid in most cases): 
+1. Managing focus, text selection, or media playback
+2. Triggering imperative animations.
+3. Integrating with third-party DOM libraries.
+- Avoid using refs for anything that can be done declaratively
+
+
+SWR
+- SWR vs. React-Query
+- https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side
+  - fetching data on the client side 
+- caching, revalidation, focus tracking, refetching on interval, and more
+
+
+https://www.contentful.com/faq/backup-security-and-hosting/#where-s-contentful-being-hosted
+- Q: Where's Contentful (CMS) hosted? 
+- Contentful is hosted on Amazon’s AWS on the US East Coast
+  The Contentful CDN, which is used for delivering the content, has edge nodes all around the world,
+  ensuring rapid content delivery no matter the destination.
+  - https://webmasters.stackexchange.com/questions/102763/how-do-cdns-determine-where-the-edge-nodes-should-be-placed/102774
+  - Q: what is an edge node in CDN? 
+  - An Edge node is the server that delivers the content to the user
+  - A CDN is typically spread throughout the globe having edge nodes at multiple continents
+
+
+- wordpress can be used as headless CMS
+  - next.js & wordpress stack 
+  - next.js & strapi stack 
+  - vercel as serverless hosting service + headless cms as data storage I think 
+  - https://www.youtube.com/watch?v=zE1S8CHkev8 --> guide on this 
+- Looking back, this sounds much like the JAM stack
+  
+
+
+gSP, gSSP, etc. + serverless api functions (within /api folder in file system) 
+- these are hidden from client
+- gSP, gSSP: you can contain any code (backend) that runs on the backend server 
+- api functions inside /api folder are called next.js's serverless function
+  - https://vercel.com/docs/serverless-functions/introduction --> official doc on serverless func 
+https://dev.to/akuks/what-is-getstaticprops-in-nextjs-3066
+- simple article on gSP and ISR (using revalidate) 
+
+
+Callbacks & Promises 
+- callback functions are not async by default, but they can be used asynchronously 
+- Promises are always asynchronous(?)
+  - "promises are specifically made for handling async operations" 
+  - You can chain multiple async operations together using multiple .then() operations, passing the
+    result of one into the next one as an input (doing this with callbacks results in "callback hell")
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+- promises official doc 
+- catch() block at the end runts if any of the .then() blocks fail (all errors are handled by a single catch)
+  - synchronous try catch won't work with promises (although it does with async/await)
+https://stackoverflow.com/questions/49911319/promise-is-synchronous-or-asynchronous-in-node-js
+- stackoverflow on Promise async  
+  - The function you pass into the Promise constructor runs synchronously
+  - anything that depends on its resolution will be called asynchronously
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then
+- mozilla doc 
+  - Once a Promise is fulfilled or rejected, the respective handler function
+  (onFulfilled or onRejected) will be called *** asynchronously *** 
+---------------------------------------------------------------------------
+console.log('start');
+const myProm = new Promise(function(resolve, reject) {
+  for (let i = 0; i < 1000; i++) {
+    console.log('running');
+  }  
+  resolve();
+});
+myProm.then(() => console.log('resolved'));
+console.log('end of main block');
+
+<result>:
+start 
+running * 1000   --> sync bc inside Promise constr
+end of main block 
+resolved  --> async bc it's resolution of Promise 
+
+
+function returnPromise() {
+  return new Promise(resolve => {
+  	console.log('flag a');
+    setTimeout(() => {
+      console.log('flag x');
+      resolve();
+    }, 1000);
+    console.log('flag b');
+  });
+}
+async function sth() {
+  let result = returnPromise();
+  console.log('flag 1');
+}
+sth();  
+
+<result>:
+'flag a'
+'flag b'
+'flag 1'
+'flag x'
+
+
+function returnPromise() {
+  return new Promise(resolve => {
+  	console.log('flag a');
+    setTimeout(() => {
+      console.log('flag x');
+      resolve('promise received');  --> resolve modified
+    }, 1000);
+      console.log('flag b');
+  });
+}
+async function sth() {
+  let result = await returnPromise(); --> await added 
+  console.log('result: ', result);
+  console.log('flag 1');
+}
+sth();  
+
+<result>: 
+'flag a'
+'flag b'
+'flag x'
+'result: promise received'
+'flag 1'
+
+// this one is all-in-one
+function returnPromise() {
+  return new Promise(resolve => {
+  	console.log('flag a');
+    setTimeout(() => {
+      console.log('flag x');
+      setTimeout(() => {
+      	console.log('event/message/callback queue');
+      }, 0)
+      resolve('job queue');
+    }, 1000);
+    console.log('flag b');
+  });
+}
+async function sth() {
+  let result = returnPromise().then(x => console.log(x));
+  console.log('flag 1');
+}
+sth();  
+
+<result>: ******* (good example)
+flag a --> flag b --> flag 1 --> flag x --> job queue --> event/.../... queue
+---------------------------------------------------------------------------#
+- resolve maps to then and reject maps to catch for all practical purposes.
+---------------------------------------------------------------------------
+const promise1 = new Promise((resolve, reject) => {
+  resolve('Success!');
+});
+
+promise1.then(x => {
+	console.log('flag1');
+  return 'obj from flag1';
+}).then((x) => console.log(x));
+
+<result>: 
+'flag1' 
+'obj from flag1' --> not a Promise, but is thenable
+---------------------------------------------------------------------------#
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then
+- Promise.prototype.then() --> official mozilla doc 
+
+
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
+- async & await official doc 
+- async --> async functions always return a Promise (guaranteed to be converted to promises)
+  - await only works inside of async functions 
+  - await blocks the code until the Promise is returned 
+    - only makes the async function block wait and not the whole program execution *** 
+  - just syntactic sugar, cleaner-looking code than chaining 'then's
+---------------------------------------------------------------------------
+async function timeTest() {     --> 9 sec
+  await timeoutPromise(3000);
+  await timeoutPromise(3000);
+  await timeoutPromise(3000);
+}
+
+async function timeTest() {     --> 3 sec
+  const timeoutPromise1 = timeoutPromise(3000);
+  const timeoutPromise2 = timeoutPromise(3000);
+  const timeoutPromise3 = timeoutPromise(3000);
+
+  await timeoutPromise1;
+  await timeoutPromise2;
+  await timeoutPromise3;
+}
+
+"your code could be slowed down by a significant number of awaited promises 
+happening straight after one another"
+---------------------------------------------------------------------------#
+
+
+
+https://www.quora.com/In-JavaScript-is-it-possible-to-write-asynchronous-functions-without-using-setTimeout
+- Q: In JavaScript is it possible to write asynchronous functions without using setTimeout()?
+- frontend --> Ajax --> asynchronous API (https://www.w3schools.com/whatis/whatis_ajax.asp)
+  - AJAX === Asynchronous JavaScript And XML
+  - AJAX allows web pages to be updated asynchronously by exchanging data with a web server behind 
+    the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
+- backend --> Node.js, there are more public APIs to make async calls
+- "However, to get real, if you want to implement your own asynchronous code from scratch,
+  at least in Nodejs you have to do this with C/C++, not JS."
+  - so ig achieving asynchronisity in javascript without pre-defined functions is impossible  ***
+
+
+<<await & then>>: 
+- await & then are pretty much the same thing I think 
+- 'then' kinda waits for promise to resolve and then runs the handler asynchronously 
+- 'await' waits for promise to resolve 
+
+
+- addEventListener --> async callback (is it?)
+- fetch --> async Promise function 
+
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing
+- There are two main types of asynchronous code style you'll come across in JavaScript code,
+  old-style callbacks and newer promise-style code
+
+https://medium.com/swlh/what-you-need-to-know-about-asynchronous-programming-in-javascript-894f90a97941
+- await and promises some good detailed exmaple (Medium article) 
+
+
+https://nodejs.dev/learn/introduction-to-nodejs
+- official node.js doc 
+- on its asynchronicity
+https://www.geeksforgeeks.org/why-node-js-is-a-single-threaded-language/?ref=rp
+- GeeksforGeeks: why node.js is a single-threaded language 
+https://medium.com/softup-technologies/node-js-internals-an-introduction-to-nodes-runtime-and-architecture-d6ec295c05ab
+- Node.js's runtime architecture 
+https://www.educative.io/edpresso/what-is-an-event-loop-in-javascript  --> <<*****AMAZING*****>>
+- <<EVENT LOOP IN JS>>
+- Call Stack, Browser APIs, Event Queue, Event Loop 
+- Whenever an async func is called, it is sent to a browser API (built into the browser)
+  - Based on the command received from the call stack, the API starts its own single-threaded operation.
+  - An example of this is the setTimeout method. When a setTimeout operation is processed in the stack,
+    it is sent to the corresponding API which waits till the specified time to send this operation back
+    in for processing. (sends back from event queue (aka callback queue) ) 
+- The language itself is single-threaded, but the browser APIs act as separate threads.
+  - The event loop facilitates this process; it constantly checks whether or not the call stack is empty.
+    If it is empty, new functions are added from the event queue
+https://www.geeksforgeeks.org/why-javascript-is-a-single-thread-language-that-can-be-non-blocking/
+- GeeksforGeeks: on call stack and callback (event) queue (with diagram)
+- "As you can see in the above diagram, DOM, AJAX, and Timeout are not actually part of JavaScript
+  but the part of RunTime Environment or browser, so these can be run asynchronously within the
+  WebAPI using the callback queue and again put in the call stack using event loop to execute."
+https://stackoverflow.com/questions/19083357/are-all-javascript-callbacks-asynchronous-if-not-how-do-i-know-which-are
+- Stackoverflow: on js's nature of single thread & asysnchronicity at a language level w/ 'then'
+  - I think "then" is like the always-async version of callbacks (callbacks aren't always async)
+    - (there are implemented func-s whose callbacks are async)
+  - "then" handlers (from my understanding) gets queued up in the callback queue, waiting to be 
+    added to the call stack (when call stack is empty) and executed
+  - "await" always assigns the resolution of the promise from the right side to the var in the left side
+  
+<<Summary of Event Loop>>:
+- js --> single-threaded --> infinite event loop that does: *********
+----------------------------------------------------------------
+while (true) { // event loop
+  if (!callStack.empty) {
+    // execute and exhaust callstack 
+  }
+  
+  if (!callbackQueue.empty) {
+    // dequeue function and push to call stack 
+  }
+}
+----------------------------------------------------------------#
+
+
+
+https://medium.com/swlh/what-is-orm-and-reasons-for-implementation-21932a554a28
+- ORM 
+- object-relational mapping
+- Object-relational-mapping is the idea of being able to write queries
+  using a programming language of your choice
+- https://sequelize.org/v3/ --> example ORM for node.js:  Sequelize 
+- https://www.w3schools.com/nodejs/nodejs_mysql_select.asp --> example of sql querying without ORM 
+- there are some tradeoffs using ORM (bc you're not querying in the query language of the db)
+
+
+
+Django vs. Flask comparison
+- Flask has jinja2 as its template engine 
+  - Flask supports Restful API (that's what it's for)
+    - https://www.youtube.com/watch?v=Z1RJmh_OqeA --> Flask Tutorial (Github code helpful)
+  - ejs (embedded javascript templates: used as node.js's view engine) is similar to Flask I think 
+    - https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application
+    - see: Step 4: passing data to views and partials 
+    - ejs is just for templating, and the REST api is done by express 
+- Django also has a template engine
+  - Django has a REST framework for Restful API support 
+<<Overview>>:  (dynamic website)
+- [[flask (backend) + jinja2]]  --> python for backend
+- [[express (backend) + ejs]] --> js for backend
+- [[Django REST framework (backend) + Django template engine]] --> python for backend
+<<summary>>: 
+- static page
+- dynamic page using templating engine in the backend
+
+
+
+https://flask.palletsprojects.com/en/2.0.x/tutorial/templates/
+- Templates are files that contain static data as well as placeholders for dynamic data. ***
+- Flask uses the Jinja template library to render templates. ***
+
+
+insight from firebase static hosting:
+- plain React is solely frontend
+- static hosting is just sending files for specific routes, 
+- https://blog.stratus10.com/how-to-host-a-static-website-with-s3-and-cloudfront
+  - interesting article on about no-server-needed static website hosting with AWS S3 + CloudFront
+https://harithj.medium.com/hosting-static-websites-on-aws-6f7c2e3b3494
+  - (Medium) detailed guide on hosting static websites on aws 
+https://medium.com/serverless-transformation/what-a-typical-100-serverless-architecture-looks-like-in-aws-40f252cd0ecb
+- <<serverless architecture in AWS>>
+- Complete, Ultimate Guide (with diagram!) on serverless architecture *************
+  
+  
+
+next.js
+- single codebase for client and server (frontend + backend(api) )
+- can split your bundle with dynamic imports 
+https://dev.to/thatanjan/13-reasons-why-you-should-use-nextjs-4kgd
+- more on benefits of next.js 
+
+
+- CSR means no content on your html page bc all content is rendered by js 
+- CSR has a huge bundle size (next.js's code splitting overcomes this)
+  - wait, is it talking about React's CSR or CSR in general? 
+  - if I used SG and CSR together, would that negatively affect the bundle size? 
+
+
+https://dev.to/nilanth/no-more-import-in-react-2mbo
+- no more "../../components/Component"
+- configuring absolute import 
+
+https://docs.oracle.com/cd/E57471_01/bigData.100/extensions_bdd/src/cext_transform_typing.html
+- statically typed vs dynamically typed languages: 
+--------------------------------------------------------------
+// Java example
+int num;
+num = 5;
+// Groovy example
+num = 5
+// Groovy example
+number = 5
+numbr = (number + 15) / 2  // note the typo
+--------------------------------------------------------------#
+- here Groovy is dynamically typed while Java is statically typed.
+- the typo "numbr" can lead to issues at runtime. 
+
+
+
+
+<<Career Advice>>: 
+"As a programmer, you should fundamentally enjoy learning and exploring.
+If you don't enjoy them, you should seriously consider other career options."
+
+
+
+https://www.youtube.com/watch?v=X0-6lyxj1_Q
+- revalidate --> used inside gSProps --> return { props: {}, revalidate: ...}
+- gSPaths --> return { paths, fallback: false }  (NO REVALIDATE HERE) 
+  - fallback: false --> 404 page if page not found 
+  - paths: array of objects --> paths: [ { params: { id: '1' } }, { params: ...}, ... ] 
+    - pages/posts/[id].js --> [id], so id property included 
+  - If the page name is pages/posts/[postId]/[commentId], then params should contain postId and commentId.
+    - looks like --> paths: [ { params: { postId: '1', commentId: '1'} }]
+  - If the page name uses catch-all routes, for example pages/[...slug], then params
+    should contain slug which is an array
+    - looks like --> paths: [ { params: { slug: ['foo', 'bar'] } }]  (/foo/bar)
+- one thing to note in gSPaths and gSProps is that revalidate regenerates the content of a page that
+  already exists (as it is in gSProps), but it doesn't create a new page (ISR only regenerates existing pages)
+  - fallback helps you with this  *** 
+https://www.youtube.com/watch?v=V4SVNleMitE
+- fallback page (net ninja)
+- fallback pages are placeholder content whilst next.js fetches new data for the page (loading deco stuff)
+- the way it works when fallback: true --> reruns gSProps *** and pumps the props to the component 
+- the next time the fetched page is visited, you don't get fallback bc it has generated the static page 
+  - and I think that's bc of revalidate (ISR) (bc he said it "reruns gSprops")
+- ONE possible problem is that user types dynamic route, but the content doesn't exist, the loading screen
+  is delievered, and it will appear as loading forever (bc there's no matching content)
+- How to fix that: 
+  return {    // inside gSProps, instead of returning props and revalidate 
+    redirect: {
+      destination: '/',
+      permanent: false  --> bc the page (with matching route) might get created in the future 
+    }
+  }
+  - now, when nonexisting page will redirect to /, the main page 
+<<SUMMARY>>:
+- fallback: false --> automatic 404 for nonexisting page
+- fallback: true --> calls gSProps again at runtime and re-renders page 
+  - lasting effect, so falblack on the same page does not occur 
+  - if route matches new page that was added after build, shows that page
+  - can show loading skeleton using next/router's router.isFallback inside component
+    - https://nextjs.org/docs/basic-features/data-fetching#fallback-pages 
+    - In the fallback version of page, props will be empty ***
+    - If page not generated yet, router.isFallback will be true, until gsProps finishes running ***
+  - if route doesn't match any page including the post-build ones, infinite loading skeleton shown
+  - to avoid that, can use redirect: {} inside gSProps (bc it's rerun by fallback):
+    - if fetched data is undefined (fetch function is executed in gSProps), redirect 
+      to 404 or custom route of your choice
+- can create custom 404 page (pages/404.js) 
+
+
+https://www.youtube.com/watch?v=O__nkXy28Lw&t=157s
+- you can create custom 404 page
+- I think you can apply this to no-content-existing page --> redirect with destination of '/404'
+
+
+<<SUMMARY>>: 
+- revalidate for ISR, but ISR is for content change, but only for existing page (not for new route) 
+- fallback: true for fetching page and rerunning gSProps, and showing loading screen while fetching new data
+  - rerunning --> means run even though it's not rebuilt (first run was at build time. gSProps doesn't run 
+    on every request *******)
+  - it's not like there's a separate fetching hidden from the user. 
+    - await client.getEntries({ ... }) --> this code inside gSProps is the fetch
+    - so, in a nutshell, fallback: true just reruns gSProps when page not in paths is reached 
+      - two cases: 1) new content after build thus not included in paths in gSPaths
+                  2) content doesn't exist 
+    - "At the same time, Next.js adds this path to the list of pre-rendered pages.
+      Subsequent requests to the same path will serve the generated page."
+- redirect in place of props and revalidate for redirecting from nonexisting page to avoid infinite loading 
+
+<<fallback insight>>: 
+https://nextjs.org/docs/basic-features/data-fetching#fallback-pages
+- if (router.isFallback) {...} 
+
+- I guess there's 2 WAYS to implement loading screen?
+  - fallback: true --> loading screen
+  - CSR using SWR --> loading screen 
+
+  
+https://nextjs.org/docs/routing/dynamic-routes
+- Predefined routes take precedence over dynamic routes, and dynamic routes over catch all routes
+
+vercel
+- can publish app on vercel with github source code (uses main branch) 
+- committing to main branch will rebuild and redeploy app (npm run build stuff) 
+
+Deploy Hooks
+- https://www.youtube.com/watch?v=x_jhDDPV2Ak (net ninja) 
+- instead of ISR, you can use web hooks (deploy hooks) to update content
+- it's basically a rebuild trigger (you can customize trigger events)
+- create vercel deploy hook, copy the url to contentful (headless cms of your choice) and 
+  create web hook, customize triggers (publish/unpublish/delete --target--> entry/asset)
+- ISR needs two refreshes for content update, but vercel deploy hooks triggers a whole rebuild
+  - even minor changes cause a rebuild, so a bit of an overkill (tradeoff) there 
+
+
+
+
+* gSPaths and gSProps are both Async * 
+- I guess they are serverless functions? 
+- you need to export them for them to work 
+

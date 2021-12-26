@@ -1,0 +1,18 @@
+Twitch <case study> 
+- recommended channels (left pannel) + Top Search Bar --> Layout kind of thing
+- go back and forth between pages: 
+  - under Home tab bar --> before videos are loaded, loading skeleton shown 
+  - previous person's background, and when data fetched, swtiches background to current
+  - item switch animations on left pannel (if same person on list but at different index, swap animation)
+- if no previous page: 
+  - under Home tab bar --> before videos are loaded, loading skeleton shown 
+  - purple background (default) --> set background
+- from this, I think it is evident that the page is delivered by CSR (client side rendering)
+- I think CSR beats SSR on loading time? 
+  - first show the page with static content 
+  - load (fetch) data (main video + list of videos under Home + background) on client side 
+  - can show the static content instantly while data is being fetched 
+  - SSR doesn't serve static content, takes loading time before page is shown 
+    - blank screen shown until page is loaded ig? 
+
+
