@@ -6,4 +6,8 @@
   .right-icon {
     @apply hidden xl:inline-block h-10 w-10 p-2 cursor-pointer hover:text-blue-300 bg-gray-300 rounded-xl
   }
+  
+  .post-icon {
+    @apply flex space-x-2 cursor-pointer hover:bg-gray-200 hover:scale-110 rounded-xl p-2 px-4 duration-300
+  }
 }
