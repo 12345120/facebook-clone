@@ -88,6 +88,10 @@ https://www.youtube.com/watch?v=NSR_Y_rm_zU
 - If you export an async function called getServerSideProps from a page,
 Next.js will pre-render this page on each request using the data returned
 by getServerSideProps.
+
+https://github.com/csfrequency/react-firebase-hooks/tree/11aa6dc474743ff1db44dbb8342c73f463fa4566/firestore
+- react-firebase-hooks (Github Repo) 
+- useCollection (listens on collection realtime) 
  
 
 https://arunoda.me/blog/ssr-and-server-only-modules

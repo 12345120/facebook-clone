@@ -1,5 +1,7 @@
-<TODO>: 
+<non-code TODO>:
 - post many posts and see if background color doesn't cover the y overflow
+- security rules --> change it to a safer one 
 
 - change theme to dark 
 - maybe custom animations? 
+
