@@ -1,6 +1,7 @@
 import { SearchIcon } from "@heroicons/react/outline";
 import { DotsHorizontalIcon, VideoCameraIcon } from "@heroicons/react/solid";
 import Contact from "./Contact";
+import Contacts from "./Contacts";
 
 function Widgets() {
   return (
@@ -8,15 +9,13 @@ function Widgets() {
       <div className="flex justify-between w-52">
         <p className="text-lg font-semibold text-gray-500">Contacts</p>
         <div className="flex space-x-2">
-          <VideoCameraIcon className="h-6" />
-          <SearchIcon className="h-6" />
-          <DotsHorizontalIcon className="h-6" />
+          <VideoCameraIcon className="h-6 cursor-pointer" />
+          <SearchIcon className="h-6 cursor-pointer" />
+          <DotsHorizontalIcon className="h-6 cursor-pointer" />
         </div>
       </div>
-
-      {contacts.map((contact) => (
-        <Contact key={contact.src} src={contact.src} name={contact.name}/>
-      ))}
+      
+      <Contacts contacts={contacts}/>
     </div>
   );
 }
