@@ -14,7 +14,7 @@ function SidebarRow({ src, Icon, title }) {
         <Icon className="h-8 w-8 text-blue-500"></Icon>
       )}
       
-      <p className="">{title}</p>
+      <p className="hidden sm:inline-block">{title}</p>
     </div>
   )
 }
