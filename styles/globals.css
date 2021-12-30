@@ -11,3 +11,11 @@
     @apply flex space-x-2 cursor-pointer hover:bg-gray-200 hover:scale-110 rounded-xl p-2 px-4 duration-300
   }
 }
+
+@layer utilities {
+  .brighten-blue:hover svg {
+    color: rgb(22,121,239);
+    transition: color 200ms;
+  }
+
+}
