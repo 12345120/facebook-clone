@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CakeIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
-import { addDoc, collection, setDoc, Timestamp } from "firebase/firestore";
+import { addDoc, collection, setDoc, Timestamp, serverTimestamp } from "firebase/firestore";
 import { firestore, storage } from "../firebase";
 import {
   getDownloadURL,
@@ -33,7 +33,7 @@ function InputBox() {
       name: session.user.name,
       email: session.user.email,
       image: session.user.image,
-      timestamp: Timestamp.now(),
+      timestamp: serverTimestamp(), 
     })
       .catch((error) => {
         console.log("rejected: ", error);
