@@ -11,7 +11,7 @@ export default function Home({ session }) {
 
   return (
     <div className="">
-      <div className="pb-[60px] h-fit bg-gray-100">
+      <div className="pb-[60px] h-fit bg-gray-100 bg-gradient-to-r from-[#B5D5F4] to-[#B7AAF9] ">
         <Head>
           <title>FaceBook</title>
         </Head>

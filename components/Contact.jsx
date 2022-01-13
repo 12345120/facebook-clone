@@ -6,7 +6,7 @@ function Contact({ src, name, hovered, setHovered }) {
 
   return (
     <div
-      className={`mt-4 flex space-x-2 items-center p-3 hover:bg-gray-300 rounded-lg cursor-pointer
+      className={`mt-4 flex space-x-2 items-center p-3 hover:bg-[#6867AC] rounded-lg cursor-pointer
     hover:translate-x-[-20px] duration-[400ms] relative ${(hovered && !selfHover) && 'opacity-50'}`}
       onMouseOver={(e) => {
         setHovered(true);

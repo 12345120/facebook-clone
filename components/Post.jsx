@@ -3,7 +3,7 @@ import { ThumbUpIcon, ChatIcon, ShareIcon } from "@heroicons/react/outline";
 
 function Post({ name, message, email, timestamp, image, postImage }) {
   return (
-    <div className="flex flex-col mt-5 p-4 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col mt-5 p-4 bg-gradient-to-r from-[#B5D3F4] to-[#9581F4] rounded-lg shadow-md">
       <div className="flex space-x-4 items-center">
         <img src={image} className="rounded-full h-10"></img>
         <div>
@@ -26,15 +26,15 @@ function Post({ name, message, email, timestamp, image, postImage }) {
 
       <div className="flex justify-evenly items-center mt-3">
         <div className="post-icon brighten-blue cursor-pointer">
-          <ThumbUpIcon className="h-7 text-blue-300" />
+          <ThumbUpIcon className="h-7 text-white" />
           <p>Like</p>
         </div>
         <div className="post-icon brighten-blue cursor-pointer">
-          <ChatIcon className="h-7 text-blue-300" />
+          <ChatIcon className="h-7 text-white" />
           <p>Comment</p>
         </div>
         <div className="post-icon brighten-blue cursor-pointer">
-          <ShareIcon className="h-7 text-blue-300" />
+          <ShareIcon className="h-7 text-white" />
           <p>Share</p>
         </div>
       </div>

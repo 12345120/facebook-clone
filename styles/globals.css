@@ -4,7 +4,7 @@
 
 @layer components {
   .right-icon {
-    @apply hidden xl:inline-block h-10 w-10 p-2 cursor-pointer hover:text-blue-300 bg-gray-300 rounded-xl
+    @apply hidden xl:inline-block h-10 w-10 p-2 cursor-pointer hover:text-[#9683F4] bg-gray-300 rounded-xl
   }
   
   .post-icon {

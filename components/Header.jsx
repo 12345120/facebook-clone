@@ -8,7 +8,7 @@ function Header() {
   const { data: session, status } = useSession() 
   
   return (
-    <div className="flex sticky top-0 z-50 bg-white items-center p-2 shadow-md">
+    <div className="flex sticky top-0 z-50 bg-[#6867AC] items-center p-2 shadow-md">
       {/* Left  */}
       <div className="flex items-center">
         <Image
@@ -44,7 +44,7 @@ function Header() {
         height={40}
         layout="fixed"></Image>
         
-        <p>{session.user.name}</p>
+        <p className="text-gray-300">{session.user.name}</p>
         <ViewGridAddIcon className="right-icon"></ViewGridAddIcon>
         <ChatIcon className="right-icon"></ChatIcon>
         <BellIcon className="right-icon"></BellIcon>

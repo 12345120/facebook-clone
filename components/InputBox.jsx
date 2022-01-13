@@ -80,7 +80,7 @@ function InputBox() {
   };
 
   return (
-    <div className="shadow-md bg-white mt-10 p-4 rounded-xl">
+    <div className="shadow-md bg-gradient-to-r from-[#B5D3F4] to-[#9581F4] mt-10 p-4 rounded-xl">
       <div className="flex items-center space-x-4">
         <Image
           className="rounded-full"
