@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CakeIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 import { useRef, useState } from "react";
-import { addDoc, collection, setDoc, Timestamp, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, setDoc, serverTimestamp, getDoc, getDocs, where, query } from "firebase/firestore";
 import { firestore, storage } from "../firebase";
 import {
   getDownloadURL,
@@ -17,48 +17,68 @@ function InputBox() {
   const inputRef = useRef(null);
   const filePickerRef = useRef(null);
   const [imgToPost, setImgToPost] = useState(null);
+  
+  async function simpleAwait(promise) {
+    try {
+      const data = await promise;
+      return [data, null];
+    } catch (error) {
+      console.error(error);
+      return [null, error]; 
+    }
+  }
 
-  const sendPost = (e) => {
+  const sendPost = async (e) => {
     e.preventDefault();
-
-    console.log("before");
 
     if (!inputRef.current.value) return;
 
-    console.log("after");
-
+    // references 
+    const usersCollection = collection(firestore, "users");
     const postsCollection = collection(firestore, "posts");
-    addDoc(postsCollection, {
-      message: inputRef.current.value,
-      name: session.user.name,
-      email: session.user.email,
-      image: session.user.image,
-      timestamp: serverTimestamp(), 
-    })
-      .catch((error) => {
-        console.log("rejected: ", error);
-      })
-      .then((document) => {
-        if (imgToPost) {
-          const storageRef = ref(storage, `posts/${document.id}`);
-          uploadString(storageRef, imgToPost, StringFormat.DATA_URL)
-            .catch((error) => console.log(error))
-            .then((result) => {
-              getDownloadURL(result.ref).then((url) => {
-                setDoc(
-                  document,
-                  {
-                    postImage: url,
-                  },
-                  { merge: true }
-                );
-              });
-            })
-            .catch((error) => console.log(error));
+    
+    const [userDocs, error4] = await simpleAwait(
+      getDocs(query(usersCollection), where("email", "==", session.user.email))
+    );
+    const [userDoc, error5] = await simpleAwait(getDoc(userDocs.docs[0].ref));
 
-          removeImageToPost();
-        }
-      });
+    // add new document 
+    const [addedDoc, error1] = await simpleAwait(
+      addDoc(postsCollection, {
+        message: inputRef.current.value,
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image,
+        timestamp: serverTimestamp(),
+        userDocId: userDoc.id,
+      })
+    );
+    
+    // add image to storage
+    if (imgToPost) {
+      const storageRef = ref(storage, `posts/${addedDoc.id}`);
+      const [result, error2] = await simpleAwait(
+        uploadString(storageRef, imgToPost, StringFormat.DATA_URL)
+      );
+      const [url, error3] = await simpleAwait(getDownloadURL(result.ref));
+      setDoc(
+        addedDoc,
+        {
+          postImage: url,
+        },
+        { merge: true }
+      );
+
+      removeImageToPost();
+    }
+
+    // add post to user's posts (up to 5 allowed)
+    const [addedDocData, error6] = await simpleAwait(getDoc(addedDoc));
+    setDoc(
+      userDoc.ref,
+      { posts: { [addedDoc.id]: addedDocData.data().timestamp } },
+      { merge: true }
+    );
 
     inputRef.current.value = "";
   };
