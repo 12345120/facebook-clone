@@ -1,10 +1,10 @@
 import { collection, orderBy, query } from "firebase/firestore";
-import { useCollection } from "react-firebase-hooks/firestore";
+import { useCollectionOnce } from "react-firebase-hooks/firestore";
 import { firestore } from "../firebase.js";
 import Post from "./Post.jsx";
 
 function Posts() {
-  const [realTimePosts, loading, error] = useCollection(
+  const [realTimePosts, loading, error] = useCollectionOnce(
     query(collection(firestore, "posts"), orderBy("timestamp", "desc"))
   );
 

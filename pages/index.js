@@ -8,28 +8,38 @@ import Login from "../components/Login";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
 import { firestore } from "../firebase";
+import { simpleAwait } from "../util/util";
 
 export default function Home({ session }) {
   if (!session) return <Login></Login>;
 
   useEffect(() => {
-    if (session) {
+    const addNewUser = async () => {
       const usersCollection = collection(firestore, "users");
-      const querySnapshot = getDocs(
-        query(usersCollection, where("email", "==", session.user.email))
-      ).then((snapshot) => {
-        if (snapshot.empty) {
-          console.log("new user: add");
+      const [snapshot, error1] = await simpleAwait(
+        getDocs(
+          query(usersCollection, where("email", "==", session.user.email))
+        )
+      );
+      if (error1) {
+        return; 
+      }
+      
+      if (snapshot.empty) {
+        const [_, error2] = simpleAwait(
           addDoc(usersCollection, {
             email: session.user.email,
             addedTimestamp: serverTimestamp(),
-          });
-        } else {
-          console.log("existing user: no add");
+          })
+        );
+        if (error2) {
+          return; 
         }
-      }).catch((error) => {
-        console.error(error); 
-      });
+      } 
+    };
+    
+    if (session) {      
+      addNewUser();
     }
   }, []);
 

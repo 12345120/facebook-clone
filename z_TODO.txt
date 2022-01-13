@@ -1,11 +1,13 @@
-<non-code TODO>:
-- security rules --> change it to a safer one
-- nextauth --> secret for prod, otherwise won't work 
-
-
+<TODO>:
 - check network tab on chrome debugger and see if firebase file with project data is included 
   even when you are not logged in by OAuth
   
 - need security rules for logged in users 
   - limit post creates 
+- rate limit (Fireship) 
+  - but I need request.auth for that 
+  - (user doc with docID as uid --> so that no malicious user can imitate 
+    user creation) (with my curernt securty code w/o request.auth, anyone can)
+
+- For now, blocked all write requests to firestore (meaning no post allowed)
 

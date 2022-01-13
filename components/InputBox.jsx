@@ -11,22 +11,13 @@ import {
   StringFormat,
   uploadString,
 } from "firebase/storage";
+import { simpleAwait } from "../util/util.js";
 
 function InputBox() {
   const { data: session, status } = useSession();
   const inputRef = useRef(null);
   const filePickerRef = useRef(null);
   const [imgToPost, setImgToPost] = useState(null);
-  
-  async function simpleAwait(promise) {
-    try {
-      const data = await promise;
-      return [data, null];
-    } catch (error) {
-      console.error(error);
-      return [null, error]; 
-    }
-  }
 
   const sendPost = async (e) => {
     e.preventDefault();
@@ -40,8 +31,14 @@ function InputBox() {
     const [userDocs, error4] = await simpleAwait(
       getDocs(query(usersCollection), where("email", "==", session.user.email))
     );
+    if (error4) {
+      return;
+    }
     const [userDoc, error5] = await simpleAwait(getDoc(userDocs.docs[0].ref));
-
+    if (error5) {
+      return;
+    }
+    
     // add new document 
     const [addedDoc, error1] = await simpleAwait(
       addDoc(postsCollection, {
@@ -53,6 +50,9 @@ function InputBox() {
         userDocId: userDoc.id,
       })
     );
+    if (error1) {
+      return;
+    }
     
     // add image to storage
     if (imgToPost) {
@@ -60,6 +60,9 @@ function InputBox() {
       const [result, error2] = await simpleAwait(
         uploadString(storageRef, imgToPost, StringFormat.DATA_URL)
       );
+      if (error2) {
+        return;
+      }
       const [url, error3] = await simpleAwait(getDownloadURL(result.ref));
       setDoc(
         addedDoc,
@@ -68,6 +71,9 @@ function InputBox() {
         },
         { merge: true }
       );
+      if (error3) {
+        return;
+      }
 
       removeImageToPost();
     }
@@ -79,6 +85,9 @@ function InputBox() {
       { posts: { [addedDoc.id]: addedDocData.data().timestamp } },
       { merge: true }
     );
+    if (error6) {
+      return;
+    }
 
     inputRef.current.value = "";
   };

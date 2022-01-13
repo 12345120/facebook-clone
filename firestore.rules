@@ -15,5 +15,8 @@ service cloud.firestore {
       allow update: if 
         resource.data.posts.keys().size() <= 4
     }
-    // TODO: 
+    
+    // This rule is not complete and is not used. See the currently deployed rule on 
+    // the Firestore developer console. 
+    
   }
