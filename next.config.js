@@ -14,7 +14,8 @@ module.exports = {
       "cdn.shopify.com",
       "pbs.twimg.com",
       "www.nme.com",
-      "scontent-lga3-2.xx.fbcdn.net"
+      "scontent-lga3-2.xx.fbcdn.net",
+      "scontent-atl3-2.xx.fbcdn.net"
     ],
   },
 }
