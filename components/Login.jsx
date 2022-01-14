@@ -11,7 +11,7 @@ function Login() {
         objectFit="contain"
       />
       <h1
-        onClick={() => signIn('facebook', { callbackUrl: 'http://localhost:3000/' })}
+        onClick={() => signIn('facebook')}
         className="w-fit my-5 p-5 bg-blue-500 rounded-full text-white cursor-pointer"
       >
         Login With Facebook

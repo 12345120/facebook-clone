@@ -11,8 +11,6 @@ import { firestore } from "../firebase";
 import { simpleAwait } from "../util/util";
 
 export default function Home({ session }) {
-  if (!session) return <Login></Login>;
-
   useEffect(() => {
     const addNewUser = async () => {
       const usersCollection = collection(firestore, "users");
@@ -42,6 +40,8 @@ export default function Home({ session }) {
       addNewUser();
     }
   }, []);
+
+  if (!session) return <Login></Login>;
 
   return (
     <div className="">
