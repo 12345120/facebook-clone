@@ -48,6 +48,7 @@ export default function Home({ session }) {
       <div className="pb-[60px] h-fit bg-gray-100 bg-gradient-to-r from-[#B5D5F4] to-[#B7AAF9] min-h-screen">
         <Head>
           <title>FaceBook</title>
+          <meta name="google-site-verification" content="g5_A1UoCX80W1e85IM1AWfd31ISPyxq8cLj6MGLmCjg" />
         </Head>
         <Header></Header>
         <main className="flex mt-6 p-4 justify-between">
