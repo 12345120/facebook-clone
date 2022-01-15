@@ -5,7 +5,8 @@ function SidebarRow({ src, Icon, title }) {
     <div className="hover:scale-[105%] duration-[300ms] flex justify-start space-x-4 p-4 w-[250px] cursor-pointer hover:bg-[#A3A6F4] rounded-lg">
       {src && (
         <Image className="rounded-full"
-        src={src}
+        // src={src}
+        src='/icons/person2.svg'
         width={30}
         height={30}
         layout="fixed"/>

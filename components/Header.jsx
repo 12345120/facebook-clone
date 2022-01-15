@@ -37,7 +37,8 @@ function Header() {
       {/* Right */}
       <div className="flex grow justify-end items-center whitespace-nowrap font-semibold space-x-6">
         <Image
-        src={session.user.image}
+        // src={session.user.image}
+        src={'/icons/person2.svg'}
         onClick={() => signOut()}
         className="cursor-pointer rounded-full"
         width={40}
