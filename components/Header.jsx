@@ -60,7 +60,8 @@ function Header() {
       <div className="flex grow justify-end items-center whitespace-nowrap font-semibold space-x-6">
         <div className="relative">
           <img
-            src={session.user.image}
+            // src={session.user.image}
+            src="/icons/person2.svg"
             onClick={() => openLogoutDropdown()}
             className="cursor-pointer rounded-full h-[40px] w-[40px]"
             alt="Log Out"
