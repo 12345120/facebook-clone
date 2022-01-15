@@ -58,21 +58,15 @@ function Header() {
 
       {/* Right */}
       <div className="flex grow justify-end items-center whitespace-nowrap font-semibold space-x-6">
-        <div className="relative">
-          <img
-            // src={session.user.image}
-            src="/icons/person2.svg"
-            onClick={() => openLogoutDropdown()}
-            className="cursor-pointer rounded-full h-[40px] w-[40px]"
-            alt="Log Out"
-          ></img>
-          <div className={`w-[120px] h-[30px] ${dropdownOpen ? 'inline' : 'hidden'} bg-white text-red-500 text-center rounded-lg
-          absolute top-[120%] left-[-100%] hover:bg-gray-300 cursor-pointer duration-300`}
-          onClick={() => signOut()}>
-            Log Out
-          </div>
-        </div>
-
+        <Image
+        // src={session.user.image}
+        src={'/icons/person2.svg'}
+        onClick={() => signOut()}
+        className="cursor-pointer rounded-full"
+        width={40}
+        height={40}
+        layout="fixed"></Image>
+        
         <p className="text-gray-300">{session.user.name}</p>
         <ViewGridAddIcon className="right-icon"></ViewGridAddIcon>
         <ChatIcon className="right-icon"></ChatIcon>
