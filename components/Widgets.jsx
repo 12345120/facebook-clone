@@ -23,49 +23,49 @@ function Widgets() {
 export default Widgets;
 
  
-const contacts = [
-  {
-    src: "/icons/person2.svg",
-    name: "Mark Zuckerberg",
-  },
-  {
-    name: "Elon Musk",
-    src: "/icons/person2.svg",
-  },
-  {
-    name: "Heon Yim",
-    src: "/icons/person2.svg",
-  },
-  {
-    name: "Bill Gates",
-    src: "/icons/person2.svg",
-  },
-  {
-    name: "Dwayne Johnson",
-    src: "/icons/person2.svg",
-  },
-];
-
-    
 // const contacts = [
 //   {
-//     src: "https://cdn.vox-cdn.com/thumbor/82lbgDp2RfnpNIRjL5ack0oRntI=/0x0:5315x3543/1200x800/filters:focal(2012x793:2862x1643)/cdn.vox-cdn.com/uploads/chorus_image/image/69153080/1178141587.jpg.0.jpg",
+//     src: "/icons/person2.svg",
 //     name: "Mark Zuckerberg",
 //   },
 //   {
 //     name: "Elon Musk",
-//     src: "https://www.cnet.com/a/img/9Dd7cm2QT62v3sCkas3MOPqtoSk=/940x0/2021/08/05/2d1d399b-2945-4596-8ea8-0c6abf48380a/gettyimages-1229901940.jpg",
+//     src: "/icons/person2.svg",
 //   },
 //   {
 //     name: "Heon Yim",
-//     src: "https://cdn.shopify.com/s/files/1/1131/9396/products/remove_background_png_5.png?v=1568753562",
+//     src: "/icons/person2.svg",
 //   },
 //   {
 //     name: "Bill Gates",
-//     src: "https://pbs.twimg.com/profile_images/1414439092373254147/JdS8yLGI_400x400.jpg",
+//     src: "/icons/person2.svg",
 //   },
 //   {
 //     name: "Dwayne Johnson",
-//     src: "https://www.nme.com/wp-content/uploads/2021/04/dwaynejohnson-2000x1270-1.jpg",
+//     src: "/icons/person2.svg",
 //   },
 // ];
+
+    
+const contacts = [
+  {
+    src: "https://cdn.vox-cdn.com/thumbor/82lbgDp2RfnpNIRjL5ack0oRntI=/0x0:5315x3543/1200x800/filters:focal(2012x793:2862x1643)/cdn.vox-cdn.com/uploads/chorus_image/image/69153080/1178141587.jpg.0.jpg",
+    name: "Mark Zuckerberg",
+  },
+  {
+    name: "Elon Musk",
+    src: "https://www.cnet.com/a/img/9Dd7cm2QT62v3sCkas3MOPqtoSk=/940x0/2021/08/05/2d1d399b-2945-4596-8ea8-0c6abf48380a/gettyimages-1229901940.jpg",
+  },
+  {
+    name: "Heon Yim",
+    src: "https://cdn.shopify.com/s/files/1/1131/9396/products/remove_background_png_5.png?v=1568753562",
+  },
+  {
+    name: "Bill Gates",
+    src: "https://pbs.twimg.com/profile_images/1414439092373254147/JdS8yLGI_400x400.jpg",
+  },
+  {
+    name: "Dwayne Johnson",
+    src: "https://www.nme.com/wp-content/uploads/2021/04/dwaynejohnson-2000x1270-1.jpg",
+  },
+];
