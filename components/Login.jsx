@@ -7,7 +7,7 @@ function Login() {
     <>
       <div className="flex flex-col justify-center items-center rounded-xl border-[2px] border-blue-300 w-fit m-auto mt-10 p-5 bg-white shadow-blue-300 shadow-xl">
         <Image
-          src="https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png"
+          src="/icons/facebook-logo.svg"
           height={400}
           width={400}
           objectFit="contain"
