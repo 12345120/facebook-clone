@@ -46,7 +46,7 @@ export default function Home({ session }) {
   return (
     <>
       <Head>
-        <title>FaceBook</title>
+        <title>Clone</title>
         <meta
           name="google-site-verification"
           content="g5_A1UoCX80W1e85IM1AWfd31ISPyxq8cLj6MGLmCjg"
