@@ -1,4 +1,11 @@
-import { addDoc, collection, getDocs, query, where, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  serverTimestamp,
+} from "firebase/firestore";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect } from "react";
@@ -20,9 +27,9 @@ export default function Home({ session }) {
         )
       );
       if (error1) {
-        return; 
+        return;
       }
-      
+
       if (snapshot.empty) {
         const [_, error2] = simpleAwait(
           addDoc(usersCollection, {
@@ -31,27 +38,40 @@ export default function Home({ session }) {
           })
         );
         if (error2) {
-          return; 
+          return;
         }
-      } 
+      }
     };
-    
-    if (session) {      
+
+    if (session) {
       addNewUser();
     }
   }, []);
 
-  if (!session) return <Login></Login>;
+  const Wrapper = ({ children }) => {
+    return (
+      <>
+        <Head>
+          <title>Clone!</title>
+          <meta
+            name="google-site-verification"
+            content="g5_A1UoCX80W1e85IM1AWfd31ISPyxq8cLj6MGLmCjg"
+          />
+        </Head>
+        {children}
+      </>
+    );
+  };
+
+  if (!session)
+    return (
+      <Wrapper>
+        <Login></Login>
+      </Wrapper>
+    );
 
   return (
-    <>
-      <Head>
-        <title>Clone</title>
-        <meta
-          name="google-site-verification"
-          content="g5_A1UoCX80W1e85IM1AWfd31ISPyxq8cLj6MGLmCjg"
-        />
-      </Head>
+    <Wrapper>
       <div className="pb-[60px] h-fit bg-gray-100 bg-gradient-to-r from-[#B5D5F4] to-[#B7AAF9] min-h-screen">
         <Header></Header>
         <main className="flex mt-6 p-4 justify-between">
@@ -60,7 +80,7 @@ export default function Home({ session }) {
           <Widgets />
         </main>
       </div>
-    </>
+    </Wrapper>
   );
 }
 
