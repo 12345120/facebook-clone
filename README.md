@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # Facebook Clone
 
 ## Introduction
@@ -20,4 +18,8 @@ This project is an attempt to clone the main page of Facebook using Next.js. Thi
 
 ## Deployment 
 
-You can visit the deployed application through the following link: [http://localhost:3000](http://localhost:3000)
+I have hosted the application on vercel. You can visit the deployed application through the following link: [https://clone-1-gp5gdc6n6-12345120.vercel.app/](https://clone-1-gp5gdc6n6-12345120.vercel.app/)
+
+## Notes 
+
+It will ask you to log in with your Facebook Account (OAuth login). After login, you will be directed to the main page. If you want to log out, you can click the person icon to the left of your Facebook name on the Navbar.
