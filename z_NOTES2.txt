@@ -89,13 +89,14 @@ console.log('flag2');
 'flag2' --> 'result'
 --------------------------------------------------------#
 - await applies to non-Promises as well (didn't know)
+- sth() runs asynchronously only when await is used (ith) 
 
 
 https://medium.com/swlh/asynchronous-javascript-in-depth-1e66c65f96fe
 - call stack, message queue, job queue 
 - maybe callback queue consists of message queue & job queue ?
 - message queue vs. job queue
-  - They are different and have different priority. Job queue is intro duced
+  - They are different and have different priority. Job queue is introduced
     in ES6 because of Promises. So the callbacks for promises are added into
     Job queue and all other callbacks are added in Message/Event queue.
 https://medium.com/@Rahulx1/understanding-event-loop-call-stack-event-job-queue-in-javascript-63dcd2c71ecd
